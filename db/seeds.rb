@@ -37,6 +37,10 @@ classifications =
 
 
 
+#Author.destroy_all
+
+
+
 
 
 25.times do
@@ -50,12 +54,13 @@ end
 
 
 50.times do
-  Book.create!(title: Faker::Book.title,
+  Book.create!(
+               title: Faker::Book.title,
                genre: Faker::Book.genre,
                classification: classifications.sample ,
                book_type: book_types.sample,
                year: years.sample,
-               sub_title: Faker::Book.quote
+               sub_title: Faker::Book.title
                )
                
     
