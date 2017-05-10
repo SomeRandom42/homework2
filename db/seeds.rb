@@ -7,6 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Book.destroy_all
+Author.destroy_all
+Authorship.destroy_all
+
 
 years = (1800..2017).to_a
 book_types =  ['Fiction', 'Nonfiction']
@@ -45,9 +48,9 @@ classifications =
 
 25.times do
   Author.create!(
-               first_name:  Faker::Author.first_name ,
-               last_name:  Faker::Author.last_name ,
-               age: Faker::Author.between(23, 99)
+               first_name:  Faker::Name.first_name ,
+               last_name:  Faker::Name.last_name ,
+               age: Faker::Number.between(23, 99)
                )
   
 end
@@ -62,16 +65,16 @@ end
                year: years.sample,
                sub_title: Faker::Book.title
                )
-               
-    
-    
-    Authorship.create!(book_id: Faker::Number.between(1, 50),
-    author_id: Faker::Number.between(1, 25)
-    
-    
-    )              
-    
 end
 
+author_ids = Author.pluck(:id)
+books= Book.all
+
+books.each do | book |
+    Authorship.create!(book_id: book.id,
+    author_id: author_ids.sample
+    )
+    
+end
 
 
